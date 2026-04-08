@@ -177,7 +177,6 @@ class TrackingNode(Node):
 
     def timer_update(self):
         ################### Write your code here ###################
-        # Save the starting pose once, in the world frame
         if self.home_pose is None:
             tf = self.tf_buffer.lookup_transform(
                 self.get_parameter('world_frame_id').value,
@@ -276,7 +275,7 @@ class TrackingNode(Node):
         F_attract[0] = k_attract * target_pose[0]
         F_attract[1] = k_attract * target_pose[1]
 
-        ## Repulsion + tangential avoidance ##
+        ## Repulsion ##
         if obstacle_pose is not None:
             obs_xy = np.array([obstacle_pose[0], obstacle_pose[1]])
             d_obs = np.linalg.norm(obs_xy)
